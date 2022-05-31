@@ -26,7 +26,7 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 32
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -42,17 +42,33 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "me.vahella.qyre_test"
         minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        targetSdkVersion 32
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
-    buildTypes {
+    signingConfigs {
         release {
+            storeFile file("../../../../.android/release.keystore")
+            storePassword "Saveyourself-0143"
+            keyAlias "androidreleasekey"
+            keyPassword "Saveyourself-0143"
+        }
+        debug {
+            storeFile file("../../../../.android/debug.keystore")
+            storePassword "Saveyourself-0143"
+            keyAlias "androiddebugkey"
+            keyPassword "Saveyourself-0143"
+        }
+    }
+    buildTypes {
+        debug {
             signingConfig signingConfigs.debug
+        }
+        release {
+            signingConfig signingConfigs.release
         }
     }
 }
